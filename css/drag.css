@@ -168,25 +168,19 @@ form input[type=text] {
 .danger{
     display: none;
     font-size: 1.5rem;
-    margin: 0 auto;
+    text-align: center;
+    border: solid 2px red;
     background-color: red;
-    border-radius: 10px;
-    opacity: .8;
-    width: 25%;
-    height: 50%;
+
 }
 
 .success{
     display: none;
     font-size: 1.5rem;
-    margin: 0 auto;
+    text-align: center;
+    border: solid 2px green;
     background-color: green;
-    border-radius: 10px;
-    opacity: .8;
-    width: 25%;
-    height: 50%;
 }
-
 /* delete and line buttons */
 
 .fa-edit{
