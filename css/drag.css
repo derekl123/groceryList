@@ -146,13 +146,13 @@ form input[type=text] {
 
 
 .clear_btn{
-    margin-top: 50px;
+    margin-top: .5rem;
     font-weight: bold;
     color: #F3f3f3;
-    width: 20vw;
-    padding: 1rem;
+    padding: 1rem 5rem;
     border-radius: 10px;
     background-color: #E2725B;
+    margin-bottom: 2rem;
 }
 
 .clear_btn:hover{
@@ -181,6 +181,7 @@ form input[type=text] {
     border: solid 2px green;
     background-color: green;
 }
+
 /* delete and line buttons */
 
 .fa-edit{
@@ -203,3 +204,31 @@ form input[type=text] {
     color: black;
 }
 
+@media only screen and (max-width: 600px){
+
+    .lunchbox_title{
+        font-size: 1.5rem;
+    }
+
+.lists{
+    display: flex;
+    flex-direction: column;
+    min-height: 300px;
+    min-width: 300px;
+}
+
+
+.food_list{
+    margin-top: 1rem;
+}
+
+.food-item{
+    padding: 5px 5px;
+}
+
+.clear_btn{
+    padding: 1 2.5rem;
+
+}
+
+}
