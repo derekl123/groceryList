@@ -1,230 +1,198 @@
-*{
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+var foodItems = document.querySelectorAll('.food_item');
+const foodList = document.querySelectorAll('.food_list');
+const form = document.querySelector('form');
+const ul = document.querySelector('ul');
+const clearBtn = document.querySelector('.clear_btn');
+const formInput = document.querySelector('.form_control');
+const feedback = document.querySelector('.feedback');
+const danger = document.querySelector('.danger');
+const success = document.querySelector('.success');
+const input = document.getElementById('input');
+const checkBtns = document.querySelectorAll('.fa-check-circle');
+const deleteBtns = document.querySelectorAll('.fa-edit');
+const data = JSON.parse(localStorage.getItem('foods'));
+
+
+
+
+
+
+
+
+
+// load local storage
+
+
+var foodsArray;
+
+
+if(localStorage.getItem('foods')){
+    foodsArray = JSON.parse(localStorage.getItem('foods'))
+} else {
+    foodsArray = [];
+}
+
+foodsArray.forEach(div => {
+    liMaker(div)
+});
+
+// create li item
+
+function liMaker(text){
+   const div = document.createElement('div');
+   var child0 = document.createElement('span');
+   child0.className = 'food_grow';
+   child0.textContent = text;
+   div.appendChild(child0);
+    div.classList.add('food_item');
+    div.draggable = 'true';
+
+    div.addEventListener('dragstart', function (e){
+        draggedItem = div;
+        setTimeout(function(){
+            div.style.display = 'none';
+        }, 0)
+    });
+    
+    div.addEventListener('dragend', function(){
+        setTimeout(function() {
+            draggedItem.style.display = 'block';
+           draggedItem = null;
+        }, 0);
+    });
+
+
+    var child1 = document.createElement('span');
+    child1.className = 'far fa-check-circle fa-fw';
+    child1.addEventListener('click', checkBtnHandler);
+    div.appendChild(child1);
+    var child2 = document.createElement('span');
+    child2.className = 'far fa-edit fa-fw';
+    child2.addEventListener('click', deleteBtnHandler);
+    div.appendChild(child2);
+    document.querySelector('.food_list').append(div);
+
+    
 }
 
 
 
-.container{
-    text-align: center;
-    min-width: 100%;
-    min-height: 100%;
-    align-items: center;
-    font-family: 'Roboto', sans-serif;
-    background: url('img/supermarket.jpeg');
-    background: #384D48;
-    background-size: cover;
-}
+form.addEventListener('submit', function(e){
+    e.preventDefault();
 
-.lists {
-    justify-content: center;
-    display: flex;
-    flex: 1;
-    width: 100%;
-}
+    const value = document.getElementById('input').value;
 
-.lunchbox_title{
-    font-size: 3rem;
-    color: #E2725B;
-    text-shadow: 2px 2px 2px #222222;
-    margin-bottom: 1rem;
-
-}
-
-
-
- .food_list {
-     margin-top: 2rem;
-	display: inline-block;
-    min-height: 650px;
-    width: 650px;
-	max-width: 100%;
-	height: 100%;
-	background-color:#CC7A5B;
-	padding: 8px;
-    transition: all 0.2s linear;
-}
-
-.food_item {
-    padding: .5rem;
-    display: flex;
-    font-size: 1.5rem;
-    background-color: #384D48;
-    color: #f3f3f3;
-    text-shadow: 1px 1px 1px black;
-    font-weight: bold;
-	border-radius: 8px;
-	text-align: left;
-    margin: 4px 0px;
-    width: 100%;
-}
-
-.food_grow{
-    flex: 1 1 0px;
-}
-
-
-
-/* drag and drop functionality */
-
-
-.hold {
-    border: solid #ccc 4px;
-}
-
-
-.hovered {
-    background: #f4f4f4;
-    border-style: dashed;
-}
-
-.invisible {
-    display: none;
-}
-
-.container{
-    display: flex;
-    flex-direction: column;
-}
-
-.box_1{
-  display: flex;
-  flex-direction: column;
-
-}
-
-/* form */
-
-.form {
-    text-align: center;
-    display: block;
-}
-
-form input[type=text] {
-    width: 400px;
-    border-radius: 8px;
-    background: #f3f3f3;
-    border: solid 2px #ff8d27;
-    padding: .5rem;
-}
-
-.input_group {
-    display: block;
-    text-align: center;
-}
-
-/* buttons */
-
-.btn_submit{
-    padding: .5rem;
-    border-radius: 8px;
-    background: #E2725B;
-    color: #f3f3f3;
-    border: 2px solid #E2725B;
-}
-
-.btn_submit:hover{
-    background: black;;
-   }
-   
-
-.button_container{
-    text-align: center;
-}
-
-
-
-
-.clear_btn{
-    margin-top: .5rem;
-    font-size: 1rem;
-    font-weight: bold;
-    color: #F3f3f3;
-    padding: 1rem 5rem;
-    border-radius: 10px;
-    background-color: #E2725B;
-    margin-bottom: 2rem;
-}
-
-.clear_btn:hover{
-    background: #f16b44;
-    opacity: .4;
-}
-
-.clear_btn:active{
-    transform: translateY(2px);
-}
-/* feedback */
-
-.danger{
-    display: none;
-    font-size: 1.5rem;
-    text-align: center;
-    border: solid 2px red;
-    background-color: red;
-
-}
-
-.success{
-    display: none;
-    font-size: 1.5rem;
-    text-align: center;
-    border: solid 2px green;
-    background-color: green;
-}
-
-/* delete and line buttons */
-
-.fa-edit{
-    margin-left: .5rem;
-    font-size: 1.5rem;
-    color: red;
-}
-
-.fa-edit:hover{
-    color: black;
-}
-
-.fa-check-circle{
-    margin-left: .5rem;
-    font-size: 1.5rem;
-    color: green;
-}
-
-.completed {
-    text-decoration: line-through;
-  }
-
-.fa-check-circle:hover{
-    color: black;
-}
-
-@media only screen and (max-width: 600px){
-
-    .lunchbox_title{
-        font-size: 2.5rem;
+    if(value == ''){
+        document.querySelector('.success').style.display = 'none';
+        document.querySelector('.danger').style.display = 'block';
+        setTimeout(function(){
+            document.querySelector('.danger').style.display = 'none';
+        }, 2000)
+    } else {
+        document.querySelector('.danger').style.display = 'none';
+        document.querySelector('.success').style.display = 'block';
+        foodsArray.push(input.value)
+        localStorage.setItem('foods', JSON.stringify(foodsArray))
+        liMaker(input.value);
+        input.value = '';
+        setTimeout(function(){
+            document.querySelector('.success').style.display = 'none';
+        }, 2000)
     }
 
-
-
-.food_list{
-    width: 300px;
-    max-width: 100%;
-    min-height: 300px;
-}
-
-.food-item{
-    padding: 5px 5px;
-}
-
-.clear_btn{
-    margin-top: 1rem;
-    padding: .5rem 2.5rem;
-
-}
-
-form input[type=text] {
-    width: 300px;
+    
    
+})
+
+
+// clear btn functionality
+
+clearBtn.addEventListener('click', function(){
+    localStorage.clear()
+    item = document.querySelector('.food_list');
+    while(item.firstChild){
+        item.removeChild(item.firstChild)
+    }
+
+    
+})
+
+// delete btn functionality
+
+function deleteBtnHandler(e){
+    const div = e.currentTarget.parentNode;
+    var index = [].indexOf.call(div.parentNode.children, div)
+    foodsArray.splice(index, 1);
+     localStorage.setItem('foods', JSON.stringify(foodsArray));
+    div.parentNode.removeChild(div);
 }
+
+function checkBtnHandler(e) {
+    const underline = e.currentTarget.parentNode;
+    underline.classList.toggle('completed');
+  }
+
+
+// button event listener functionlity
+
+
+deleteBtns.forEach(function(btn) {
+    btn.addEventListener('click', deleteBtnHandler);
+  
+  });
+  
+  checkBtns.forEach(function(btn) {
+    btn.addEventListener('click', checkBtnHandler);
+  });
+
+
+// drag drop functionality
+
+
+
+let draggedItem = null;
+
+foodItems.forEach(function(e, i){
+
+var item = foodItems[i];
+item.addEventListener('dragstart', function (e){
+    draggedItem = item;
+    setTimeout(function(){
+        item.style.display = 'none';
+    }, 0)
+});
+
+item.addEventListener('dragend', function(){
+    setTimeout(function() {
+        draggedItem.style.display = 'block';
+       draggedItem = null;
+    }, 0);
+});
+
+});
+
+
+foodList.forEach(function(list){
+
+
+    list.addEventListener('dragover', function(e){
+        e.preventDefault();
+    });
+
+    list.addEventListener('dragenter', function(e){
+        e.preventDefault();
+        this.style.backgroundColor = 'rgba(0, 0, 0, 0.2);';
+    
+    });
+
+    list.addEventListener('dragleave', function(e){
+        this.style.backgroundColor = 'rgba(0, 0, 0, 0.1);';
+    })
+   
+
+    list.addEventListener('drop', function(e){
+        list.append(draggedItem);
+        this.style.backgroundColor = 'rgba(255,255,255, 0.3);';
+    });
+})
+
