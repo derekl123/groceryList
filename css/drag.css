@@ -47,16 +47,21 @@
 }
 
 .food_item {
+    padding: .5rem;
+    display: flex;
     font-size: 1.5rem;
     background-color: #384D48;
     color: #f3f3f3;
     text-shadow: 1px 1px 1px black;
     font-weight: bold;
 	border-radius: 8px;
-	padding: 10px 10px;
-	text-align: center;
+	text-align: left;
     margin: 4px 0px;
     width: 100%;
+}
+
+.food_grow{
+    flex: 1 1 0px;
 }
 
 
@@ -116,7 +121,7 @@ form input[type=text] {
     border-radius: 8px;
     background: #E2725B;
     color: #f3f3f3;
-border: 2px solid #E2725B;
+    border: 2px solid #E2725B;
 }
 
 .btn_submit:hover{
@@ -222,6 +227,4 @@ border: 2px solid #E2725B;
 form input[type=text] {
     width: 300px;
    
-}
-
 }
