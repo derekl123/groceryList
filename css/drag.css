@@ -116,6 +116,7 @@ form input[type=text] {
     border-radius: 8px;
     background: #E2725B;
     color: #f3f3f3;
+border: 2px solid #E2725B;
 }
 
 .btn_submit:hover{
