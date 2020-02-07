@@ -10,7 +10,6 @@ const success = document.querySelector('.success');
 const input = document.getElementById('input');
 const checkBtns = document.querySelectorAll('.fa-check-circle');
 const deleteBtns = document.querySelectorAll('.fa-edit');
-
 const data = JSON.parse(localStorage.getItem('foods'));
 
 
@@ -41,12 +40,14 @@ foodsArray.forEach(div => {
 
 function liMaker(text){
    const div = document.createElement('div');
-    div.textContent = text;
+   var child0 = document.createElement('span');
+   child0.className = 'food_grow';
+   child0.textContent = text;
+   div.appendChild(child0);
     div.classList.add('food_item');
     div.draggable = 'true';
 
     div.addEventListener('dragstart', function (e){
-        console.log('cheese');
         draggedItem = div;
         setTimeout(function(){
             div.style.display = 'none';
@@ -62,11 +63,11 @@ function liMaker(text){
 
 
     var child1 = document.createElement('span');
-    child1.className = 'far fa-check-circle';
+    child1.className = 'far fa-check-circle fa-fw';
     child1.addEventListener('click', checkBtnHandler);
     div.appendChild(child1);
     var child2 = document.createElement('span');
-    child2.className = 'far fa-edit';
+    child2.className = 'far fa-edit fa-fw';
     child2.addEventListener('click', deleteBtnHandler);
     div.appendChild(child2);
     document.querySelector('.food_list').append(div);
@@ -194,5 +195,4 @@ foodList.forEach(function(list){
         this.style.backgroundColor = 'rgba(255,255,255, 0.3);';
     });
 })
-
 
